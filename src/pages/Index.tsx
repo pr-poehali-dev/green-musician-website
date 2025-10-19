@@ -19,6 +19,30 @@ const Index = () => {
     { title: 'Green Machine', duration: '5:03', plays: '1.5M' },
   ];
 
+  const releases = [
+    { 
+      title: 'Emerald Horizons', 
+      year: '2024', 
+      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/9948f111-c6cc-4809-8001-179edf7a20ea.jpg',
+      tracks: 8,
+      type: 'Album'
+    },
+    { 
+      title: 'Digital Dreams EP', 
+      year: '2023', 
+      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/1a4cd4ed-17b8-4906-8885-a72f88cdab0f.jpg',
+      tracks: 4,
+      type: 'EP'
+    },
+    { 
+      title: 'Green Machine', 
+      year: '2023', 
+      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/d8bb3772-871a-430c-8ef5-f85109c4931c.jpg',
+      tracks: 1,
+      type: 'Single'
+    },
+  ];
+
 
 
   return (
@@ -28,7 +52,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-secondary">secondgra2e</h1>
             <div className="flex gap-8">
-              {['home', 'music'].map((section) => (
+              {['home', 'music', 'releases'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -36,7 +60,7 @@ const Index = () => {
                     activeSection === section ? 'text-secondary' : 'text-foreground/70'
                   }`}
                 >
-                  {section === 'home' ? 'Главная' : 'Музыка'}
+                  {section === 'home' ? 'Главная' : section === 'music' ? 'Музыка' : 'Релизы'}
                 </button>
               ))}
             </div>
@@ -126,7 +150,43 @@ const Index = () => {
         </div>
       </section>
 
-
+      <section id="releases" className="min-h-screen py-20 px-6 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-5xl font-bold mb-12 text-center">Релизы</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {releases.map((release, index) => (
+              <Card
+                key={release.title}
+                className="overflow-hidden bg-card border-primary/20 hover:border-secondary transition-all hover:scale-[1.02] animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={release.cover}
+                    alt={release.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">
+                      {release.type}
+                    </span>
+                    <span className="text-sm text-muted-foreground">{release.year}</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">{release.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{release.tracks} треков</p>
+                  <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                    <Icon name="Play" size={16} className="mr-2" />
+                    Слушать
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <footer className="bg-muted/50 border-t border-primary/20 py-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
