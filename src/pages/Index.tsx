@@ -27,6 +27,7 @@ const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [releases, setReleases] = useState<Release[]>([]);
+  const [showMusicLinks, setShowMusicLinks] = useState(false);
 
   useEffect(() => {
     fetch(`${API_URL}?resource=tracks`)
@@ -124,7 +125,7 @@ const Index = () => {
           </div>
           
           <div className="flex gap-6 justify-center mt-12">
-            {['Instagram', 'Music', 'Headphones'].map((icon, index) => (
+            {['Instagram', 'Headphones'].map((icon, index) => (
               <a
                 key={icon}
                 href="#"
@@ -134,7 +135,49 @@ const Index = () => {
                 <Icon name={icon} size={20} />
               </a>
             ))}
+            <button
+              onClick={() => setShowMusicLinks(!showMusicLinks)}
+              className="w-12 h-12 rounded-full bg-muted flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all"
+              style={{ animationDelay: '0.7s' }}
+            >
+              <Icon name="Music" size={20} />
+            </button>
           </div>
+          
+          {showMusicLinks && (
+            <div className="mt-8 animate-fade-in">
+              <div className="inline-flex flex-col gap-3 bg-card p-6 rounded-lg border border-primary/20 shadow-xl">
+                <h3 className="text-lg font-semibold mb-2 text-center">Слушать на платформах</h3>
+                <a
+                  href="https://open.spotify.com/artist/secondgra2e"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 bg-[#1DB954] hover:bg-[#1ed760] text-white rounded-lg transition-all hover:scale-105"
+                >
+                  <Icon name="Music" size={20} />
+                  <span className="font-semibold">Spotify</span>
+                </a>
+                <a
+                  href="https://music.yandex.ru/artist/secondgra2e"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 bg-[#FFCC00] hover:bg-[#FFD633] text-black rounded-lg transition-all hover:scale-105"
+                >
+                  <Icon name="Music" size={20} />
+                  <span className="font-semibold">Яндекс Музыка</span>
+                </a>
+                <a
+                  href="https://vk.com/artist/secondgra2e"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3 bg-[#0077FF] hover:bg-[#0088FF] text-white rounded-lg transition-all hover:scale-105"
+                >
+                  <Icon name="Music" size={20} />
+                  <span className="font-semibold">ВКонтакте</span>
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
