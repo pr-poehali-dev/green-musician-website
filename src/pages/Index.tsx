@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -48,10 +49,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-primary/20">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-secondary">secondgra2e</h1>
-            <div className="flex gap-8">
+            <h1 className="text-xl sm:text-2xl font-bold text-secondary">secondgra2e</h1>
+            
+            <button 
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={24} />
+            </button>
+            
+            <div className="hidden md:flex gap-8">
               {['home', 'music', 'releases'].map((section) => (
                 <button
                   key={section}
@@ -65,6 +74,25 @@ const Index = () => {
               ))}
             </div>
           </div>
+          
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 flex flex-col gap-4">
+              {['home', 'music', 'releases'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => {
+                    scrollToSection(section);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`capitalize transition-colors hover:text-secondary text-left ${
+                    activeSection === section ? 'text-secondary' : 'text-foreground/70'
+                  }`}
+                >
+                  {section === 'home' ? 'Главная' : section === 'music' ? 'Музыка' : 'Релизы'}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
 
@@ -75,21 +103,21 @@ const Index = () => {
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
         
-        <div className="relative z-10 text-center px-6">
-          <div className="mb-8 inline-block">
+        <div className="relative z-10 text-center px-4 sm:px-6">
+          <div className="mb-6 sm:mb-8 inline-block">
             <img 
               src="https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/d8bb3772-871a-430c-8ef5-f85109c4931c.jpg"
               alt="secondgra2e"
-              className="w-64 h-64 rounded-full object-cover border-4 border-secondary shadow-2xl shadow-secondary/50"
+              className="w-48 h-48 sm:w-64 sm:h-64 rounded-full object-cover border-4 border-secondary shadow-2xl shadow-secondary/50"
             />
           </div>
-          <h2 className="text-7xl font-bold mb-8 animate-fade-in">secondgra2e</h2>
-          <div className="flex gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-6 text-lg">
+          <h2 className="text-4xl sm:text-7xl font-bold mb-6 sm:mb-8 animate-fade-in">secondgra2e</h2>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in max-w-sm sm:max-w-none mx-auto" style={{ animationDelay: '0.2s' }}>
+            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg">
               <Icon name="Play" size={20} className="mr-2" />
               Слушать
             </Button>
-            <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 px-8 py-6 text-lg">
+            <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary/10 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg">
               <Icon name="Mail" size={20} className="mr-2" />
               Контакт
             </Button>
@@ -110,37 +138,37 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="music" className="min-h-screen py-20 px-6">
+      <section id="music" className="min-h-screen py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-5xl font-bold mb-12 text-center">Музыка</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-8 sm:mb-12 text-center">Музыка</h2>
           
           <div className="grid gap-4">
             {tracks.map((track, index) => (
               <Card
                 key={track.title}
-                className="p-6 bg-card border-primary/20 hover:border-secondary transition-all hover:scale-[1.02] animate-fade-in"
+                className="p-4 sm:p-6 bg-card border-primary/20 hover:border-secondary transition-all hover:scale-[1.02] animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <Button size="icon" className="bg-secondary hover:bg-secondary/90 rounded-full w-14 h-14">
-                      <Icon name="Play" size={24} />
+                <div className="flex items-center justify-between flex-wrap gap-3">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1">
+                    <Button size="icon" className="bg-secondary hover:bg-secondary/90 rounded-full w-12 h-12 sm:w-14 sm:h-14 shrink-0">
+                      <Icon name="Play" size={20} />
                     </Button>
-                    <div>
-                      <h3 className="text-xl font-semibold">{track.title}</h3>
-                      <p className="text-muted-foreground">{track.duration}</p>
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-xl font-semibold truncate">{track.title}</h3>
+                      <p className="text-sm text-muted-foreground">{track.duration}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="flex items-center gap-2 sm:gap-6">
+                    <div className="hidden sm:flex items-center gap-2 text-muted-foreground">
                       <Icon name="Play" size={16} />
                       <span>{track.plays}</span>
                     </div>
-                    <Button variant="ghost" size="icon">
-                      <Icon name="Heart" size={20} />
+                    <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                      <Icon name="Heart" size={18} />
                     </Button>
-                    <Button variant="ghost" size="icon">
-                      <Icon name="Share2" size={20} />
+                    <Button variant="ghost" size="icon" className="h-8 w-8 sm:h-10 sm:w-10">
+                      <Icon name="Share2" size={18} />
                     </Button>
                   </div>
                 </div>
@@ -150,9 +178,9 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="releases" className="min-h-screen py-20 px-6 bg-muted/30">
+      <section id="releases" className="min-h-screen py-12 sm:py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-12 text-center">Релизы</h2>
+          <h2 className="text-3xl sm:text-5xl font-bold mb-8 sm:mb-12 text-center">Релизы</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {releases.map((release, index) => (
@@ -188,10 +216,10 @@ const Index = () => {
         </div>
       </section>
 
-      <footer className="bg-muted/50 border-t border-primary/20 py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-bold mb-8 text-secondary">secondgra2e</h3>
-          <div className="flex gap-6 justify-center mb-8">
+      <footer className="bg-muted/50 border-t border-primary/20 py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-secondary">secondgra2e</h3>
+          <div className="flex gap-4 sm:gap-6 justify-center mb-6 sm:mb-8">
             {['Instagram', 'Music', 'Mail', 'Headphones'].map((icon) => (
               <a
                 key={icon}
