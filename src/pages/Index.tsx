@@ -1,49 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import CarAnimation from '@/components/CarAnimation';
 
+const API_URL = 'https://functions.poehali.dev/ce7fef25-7591-4565-a050-3eabbc57ae75';
+
+interface Track {
+  id: number;
+  title: string;
+  duration: string;
+  plays: string;
+}
+
+interface Release {
+  id: number;
+  title: string;
+  year: string;
+  cover_url: string;
+  tracks_count: number;
+  type: string;
+}
+
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [releases, setReleases] = useState<Release[]>([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}?resource=tracks`)
+      .then(res => res.json())
+      .then(data => setTracks(data.tracks));
+    
+    fetch(`${API_URL}?resource=releases`)
+      .then(res => res.json())
+      .then(data => setReleases(data.releases));
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const tracks = [
-    { title: 'Neon Dreams', duration: '3:45', plays: '1.2M' },
-    { title: 'Emerald Flow', duration: '4:12', plays: '890K' },
-    { title: 'Digital Pulse', duration: '3:28', plays: '2.1M' },
-    { title: 'Green Machine', duration: '5:03', plays: '1.5M' },
-  ];
-
-  const releases = [
-    { 
-      title: 'Emerald Horizons', 
-      year: '2024', 
-      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/9948f111-c6cc-4809-8001-179edf7a20ea.jpg',
-      tracks: 8,
-      type: 'Album'
-    },
-    { 
-      title: 'Digital Dreams EP', 
-      year: '2023', 
-      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/1a4cd4ed-17b8-4906-8885-a72f88cdab0f.jpg',
-      tracks: 4,
-      type: 'EP'
-    },
-    { 
-      title: 'Green Machine', 
-      year: '2023', 
-      cover: 'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/d8bb3772-871a-430c-8ef5-f85109c4931c.jpg',
-      tracks: 1,
-      type: 'Single'
-    },
-  ];
 
 
 
@@ -194,7 +193,7 @@ const Index = () => {
               >
                 <div className="aspect-square overflow-hidden">
                   <img
-                    src={release.cover}
+                    src={release.cover_url}
                     alt={release.title}
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
@@ -207,7 +206,7 @@ const Index = () => {
                     <span className="text-sm text-muted-foreground">{release.year}</span>
                   </div>
                   <h3 className="text-xl font-bold mb-2">{release.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{release.tracks} треков</p>
+                  <p className="text-sm text-muted-foreground mb-4">{release.tracks_count} треков</p>
                   <Button className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90">
                     <Icon name="Play" size={16} className="mr-2" />
                     Слушать
