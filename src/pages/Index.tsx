@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import CarAnimation from '@/components/CarAnimation';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -177,6 +178,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <CarAnimation />
 
       <section id="releases" className="min-h-screen py-12 sm:py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-6xl mx-auto">
