@@ -19,11 +19,7 @@ const Index = () => {
     { title: 'Green Machine', duration: '5:03', plays: '1.5M' },
   ];
 
-  const galleryImages = [
-    'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/1a4cd4ed-17b8-4906-8885-a72f88cdab0f.jpg',
-    'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/9948f111-c6cc-4809-8001-179edf7a20ea.jpg',
-    'https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/d8bb3772-871a-430c-8ef5-f85109c4931c.jpg',
-  ];
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -32,7 +28,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-secondary">secondgra2e</h1>
             <div className="flex gap-8">
-              {['home', 'music', 'bio', 'gallery'].map((section) => (
+              {['home', 'music'].map((section) => (
                 <button
                   key={section}
                   onClick={() => scrollToSection(section)}
@@ -40,9 +36,7 @@ const Index = () => {
                     activeSection === section ? 'text-secondary' : 'text-foreground/70'
                   }`}
                 >
-                  {section === 'bio' ? 'Биография' : 
-                   section === 'home' ? 'Главная' :
-                   section === 'music' ? 'Музыка' : 'Галерея'}
+                  {section === 'home' ? 'Главная' : 'Музыка'}
                 </button>
               ))}
             </div>
@@ -132,69 +126,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="bio" className="min-h-screen py-20 px-6 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl font-bold mb-12 text-center">Биография</h2>
-          
-          <Card className="p-8 bg-card border-primary/20">
-            <div className="space-y-6 text-lg leading-relaxed">
-              <p>
-                <span className="text-3xl font-bold text-secondary">secondgra2e</span> — это электронный музыкальный проект, 
-                созданный в 2020 году. Уникальное звучание сочетает в себе элементы ambient, techno и experimental electronica.
-              </p>
-              
-              <p>
-                За короткое время проект завоевал признание слушателей по всему миру, набрав более 
-                <span className="text-secondary font-semibold"> 5 миллионов прослушиваний</span> на стриминговых платформах.
-              </p>
-              
-              <p>
-                Вдохновленный природой и технологиями, secondgra2e создает атмосферные композиции, 
-                которые переносят слушателей в параллельные миры цифровых пейзажей и органических текстур.
-              </p>
-              
-              <div className="grid grid-cols-3 gap-6 mt-12">
-                {[
-                  { icon: 'Music', label: '12 релизов', value: '2020-2025' },
-                  { icon: 'Users', label: '50K+ фанатов', value: 'по всему миру' },
-                  { icon: 'Award', label: 'Награды', value: 'Best New Artist 2023' },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center p-4 bg-muted rounded-lg">
-                    <Icon name={stat.icon} size={32} className="mx-auto mb-3 text-secondary" />
-                    <p className="font-semibold text-foreground">{stat.label}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{stat.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
 
-      <section id="gallery" className="min-h-screen py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold mb-12 text-center">Галерея</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-lg aspect-square animate-fade-in hover-scale cursor-pointer"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <img
-                  src={image}
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <p className="text-foreground font-semibold">Photo {index + 1}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <footer className="bg-muted/50 border-t border-primary/20 py-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
