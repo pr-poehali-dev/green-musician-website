@@ -65,9 +65,8 @@ const Index = () => {
               className="w-64 h-64 rounded-full object-cover border-4 border-secondary shadow-2xl shadow-secondary/50"
             />
           </div>
-          <h2 className="text-7xl font-bold mb-4 animate-fade-in">secondgra2e</h2>
-          <p className="text-2xl text-secondary mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>Electronic Music Producer</p>
-          <div className="flex gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+          <h2 className="text-7xl font-bold mb-8 animate-fade-in">secondgra2e</h2>
+          <div className="flex gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-6 text-lg">
               <Icon name="Play" size={20} className="mr-2" />
               Слушать
@@ -199,8 +198,7 @@ const Index = () => {
 
       <footer className="bg-muted/50 border-t border-primary/20 py-12">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-2xl font-bold mb-4 text-secondary">secondgra2e</h3>
-          <p className="text-muted-foreground mb-6">Electronic Music Producer</p>
+          <h3 className="text-2xl font-bold mb-8 text-secondary">secondgra2e</h3>
           <div className="flex gap-6 justify-center mb-8">
             {['Instagram', 'Music', 'Mail', 'Headphones'].map((icon) => (
               <a
