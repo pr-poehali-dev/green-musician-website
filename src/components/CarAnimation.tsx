@@ -71,15 +71,9 @@ const CarAnimation = () => {
             >
               <img
                 src="https://cdn.poehali.dev/projects/6c479a3b-f230-4b60-9fc3-a32f02789c15/files/d8bb3772-871a-430c-8ef5-f85109c4931c.jpg"
-                alt="2gr"
+                alt="secondgra2e"
                 className="w-full h-full object-cover"
               />
-            </div>
-            
-            <div 
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-secondary text-secondary-foreground px-2 py-0.5 rounded text-xs font-bold shadow-md whitespace-nowrap"
-            >
-              2gr
             </div>
           </div>
         </div>
